@@ -1,0 +1,45 @@
+/* ==========================================
+   GLOBAL STYLING
+========================================== */
+body {
+    background-color: #0E1117;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #00C9A7;
+    font-size: 36px;
+}
+
+.header p {
+    color: #AAAAAA;
+}
+
+/* RESULT BOXES */
+.real-box {
+    background-color: #1f3d2b;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #00ff9f;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.fake-box {
+    background-color: #3d1f1f;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #ff4b4b;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
