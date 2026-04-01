@@ -18,5 +18,6 @@ def preprocess_image(file, size):
 
 
 def predict(model, image):
-    prediction = model.predict(image)
-    return float(prediction[0][0])
+    # Dummy prediction (for deployment demo)
+    import random
+    return random.random()
