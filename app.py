@@ -1,6 +1,7 @@
+
+import streamlit as st
 st.sidebar.title("About")
 st.sidebar.info("This system detects fake currency using AI.")
-import streamlit as st
 from config import MODEL_PATH, IMAGE_SIZE
 from model_loader import load_trained_model
 from utils import preprocess_image, predict
