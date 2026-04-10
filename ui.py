@@ -4,25 +4,24 @@ def load_css():
     st.markdown("""
     <style>
 
-    /* GLOBAL */
     body {
-        background: linear-gradient(135deg, #0f172a, #020617);
+        background: linear-gradient(135deg, #020617, #0f172a);
         color: white;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
 
     /* NAVBAR */
     .navbar {
         display: flex;
         justify-content: space-between;
-        padding: 10px 30px;
+        padding: 15px 40px;
         background: rgba(255,255,255,0.05);
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 20px;
     }
 
     .logo {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: bold;
         color: #38bdf8;
     }
@@ -30,72 +29,50 @@ def load_css():
     /* HERO */
     .hero {
         text-align: center;
-        padding: 40px 20px;
+        margin-top: 30px;
     }
 
     .hero-title {
-        font-size: 50px;
+        font-size: 48px;
         font-weight: bold;
         background: linear-gradient(to right, #38bdf8, #6366f1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
-    .hero-subtitle {
+    .hero-sub {
         color: #cbd5f5;
         margin-top: 10px;
-        font-size: 18px;
-    }
-
-    /* BUTTON */
-    .cta {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: #38bdf8;
-        color: black;
-        border-radius: 8px;
-        font-weight: bold;
-        display: inline-block;
     }
 
     /* CARD */
     .card {
         background: rgba(255,255,255,0.05);
-        padding: 20px;
+        padding: 25px;
         border-radius: 15px;
         backdrop-filter: blur(10px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         margin-top: 20px;
-    }
-
-    /* FEATURE GRID */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 30px;
     }
 
     /* RESULT */
     .real {
         color: #22c55e;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: bold;
     }
 
     .fake {
         color: #ef4444;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: bold;
     }
 
-    /* UPLOAD */
-    .upload {
-        border: 2px dashed #38bdf8;
-        padding: 30px;
-        border-radius: 12px;
+    /* FOOTER */
+    .footer {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 40px;
+        color: #94a3b8;
     }
 
     </style>
@@ -106,7 +83,7 @@ def navbar():
     st.markdown("""
     <div class="navbar">
         <div class="logo">Rupee Vision</div>
-        <div>AI Currency Detection</div>
+        <div>AI Currency Detection Platform</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -114,32 +91,18 @@ def navbar():
 def hero():
     st.markdown("""
     <div class="hero">
-        <div class="hero-title">Detect Fake Currency Instantly</div>
-        <div class="hero-subtitle">
-            Powered by Deep Learning for real-time verification
-        </div>
-        <div class="cta">Upload & Analyze</div>
+        <div class="hero-title">Rupee Vision</div>
+        <div class="hero-sub">Detect Fake Currency with AI Precision</div>
     </div>
     """, unsafe_allow_html=True)
 
 
-def features():
-    st.markdown("""
-    <div class="grid">
-        <div class="card">
-            <h4>⚡ Fast</h4>
-            <p>Instant AI predictions</p>
-        </div>
-        <div class="card">
-            <h4>🧠 Smart</h4>
-            <p>CNN-based detection</p>
-        </div>
-        <div class="card">
-            <h4>🌐 Simple</h4>
-            <p>User-friendly interface</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+def upload_card():
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown("### Upload Currency Image")
+    file = st.file_uploader("", type=["jpg", "jpeg", "png"])
+    st.markdown('</div>', unsafe_allow_html=True)
+    return file
 
 
 def show_result(score):
@@ -153,6 +116,14 @@ def show_result(score):
         confidence = 1 - score
 
     st.progress(int(confidence * 100))
-    st.write(f"Confidence: {confidence:.2f}")
+    st.metric("Confidence Score", f"{confidence:.2f}")
 
     st.markdown('</div>', unsafe_allow_html=True)
+
+
+def footer():
+    st.markdown("""
+    <div class="footer">
+        Built with AI • Rupee Vision © 2026
+    </div>
+    """, unsafe_allow_html=True)
