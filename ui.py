@@ -3,66 +3,141 @@ import streamlit as st
 def load_css():
     st.markdown("""
     <style>
+
+    /* GLOBAL */
     body {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(135deg, #0f172a, #020617);
         color: white;
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    .main-title {
-        text-align: center;
-        font-size: 40px;
+    /* NAVBAR */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 30px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        font-size: 20px;
         font-weight: bold;
-        background: -webkit-linear-gradient(#00c6ff, #0072ff);
+        color: #38bdf8;
+    }
+
+    /* HERO */
+    .hero {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .hero-title {
+        font-size: 50px;
+        font-weight: bold;
+        background: linear-gradient(to right, #38bdf8, #6366f1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 5px;
     }
 
-    .subtitle {
-        text-align: center;
-        color: #cccccc;
-        margin-bottom: 30px;
+    .hero-subtitle {
+        color: #cbd5f5;
+        margin-top: 10px;
+        font-size: 18px;
     }
 
+    /* BUTTON */
+    .cta {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #38bdf8;
+        color: black;
+        border-radius: 8px;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    /* CARD */
     .card {
-        background-color: rgba(255,255,255,0.05);
+        background: rgba(255,255,255,0.05);
         padding: 20px;
         border-radius: 15px;
         backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         margin-top: 20px;
     }
 
+    /* FEATURE GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    /* RESULT */
     .real {
-        color: #00ff9f;
-        font-size: 22px;
+        color: #22c55e;
+        font-size: 24px;
         font-weight: bold;
     }
 
     .fake {
-        color: #ff4b4b;
-        font-size: 22px;
+        color: #ef4444;
+        font-size: 24px;
         font-weight: bold;
     }
+
+    /* UPLOAD */
+    .upload {
+        border: 2px dashed #38bdf8;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
 
-def header():
-    st.markdown('<div class="main-title">Fake Currency Detector</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subtitle">AI-powered currency authenticity verification system</div>', unsafe_allow_html=True)
-
-
-def info_section():
+def navbar():
     st.markdown("""
-    <div class="card">
-    <h4>How it works</h4>
-    <ul>
-        <li>Upload a currency image</li>
-        <li>Image is processed using AI</li>
-        <li>Model predicts real or fake</li>
-        <li>Confidence score is displayed</li>
-    </ul>
+    <div class="navbar">
+        <div class="logo">Rupee Vision</div>
+        <div>AI Currency Detection</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def hero():
+    st.markdown("""
+    <div class="hero">
+        <div class="hero-title">Detect Fake Currency Instantly</div>
+        <div class="hero-subtitle">
+            Powered by Deep Learning for real-time verification
+        </div>
+        <div class="cta">Upload & Analyze</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def features():
+    st.markdown("""
+    <div class="grid">
+        <div class="card">
+            <h4>⚡ Fast</h4>
+            <p>Instant AI predictions</p>
+        </div>
+        <div class="card">
+            <h4>🧠 Smart</h4>
+            <p>CNN-based detection</p>
+        </div>
+        <div class="card">
+            <h4>🌐 Simple</h4>
+            <p>User-friendly interface</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
