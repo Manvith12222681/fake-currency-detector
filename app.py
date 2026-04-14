@@ -2,38 +2,56 @@ import streamlit as st
 from config import MODEL_PATH, IMAGE_SIZE
 from model_loader import load_trained_model
 from utils import preprocess_image, predict
-from ui import load_css, navbar, hero, upload_card, show_result, footer
+from ui import load_css, navbar, hero, upload_card, show_result, footer, auth_ui
+from auth import login, signup
 
-# Page config
 st.set_page_config(page_title="Rupee Vision", layout="wide")
 
-# UI
+# Initialize session
+if "logged_in" not in st.session_state:
+    st.session_state["logged_in"] = False
+
+# Load styles
 load_css()
-navbar()
-hero()
 
-# Sidebar
-st.sidebar.title("Dashboard")
-st.sidebar.info("AI-powered fake currency detection")
+# ================= LOGIN PAGE =================
+if not st.session_state["logged_in"]:
 
-# Load model
-model = load_trained_model(MODEL_PATH)
+    auth_ui()
 
-# Layout
-col1, col2 = st.columns([1, 1])
+    menu = st.radio("Select Option", ["Login", "Sign Up"])
 
-with col1:
-    uploaded_file = upload_card()
+    if menu == "Login":
+        login()
+    else:
+        signup()
 
-with col2:
-    if uploaded_file:
-        with st.spinner("Analyzing currency..."):
-            image, display_img = preprocess_image(uploaded_file, IMAGE_SIZE)
+# ================= MAIN APP =================
+else:
 
-        st.image(display_img, caption="Uploaded Image", use_column_width=True)
+    navbar()
+    hero()
 
-        score = predict(model, image)
-        show_result(score)
+    st.sidebar.success(f"Logged in as {st.session_state['user']}")
 
-# Footer
-footer()
+    if st.sidebar.button("Logout"):
+        st.session_state["logged_in"] = False
+
+    model = load_trained_model(MODEL_PATH)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        uploaded_file = upload_card()
+
+    with col2:
+        if uploaded_file:
+            with st.spinner("Analyzing..."):
+                image, display_img = preprocess_image(uploaded_file, IMAGE_SIZE)
+
+            st.image(display_img, caption="Uploaded Image", use_column_width=True)
+
+            score = predict(model, image)
+            show_result(score)
+
+    footer()
