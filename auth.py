@@ -1,24 +1,8 @@
 import streamlit as st
 
-# Simple in-memory user storage
 users = {}
 
-def signup():
-    st.subheader("Create Account")
-
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-
-    if st.button("Sign Up"):
-        if username in users:
-            st.error("User already exists")
-        else:
-            users[username] = password
-            st.success("Account created successfully")
-
 def login():
-    st.subheader("Login")
-
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
@@ -29,3 +13,12 @@ def login():
             st.success("Login successful")
         else:
             st.error("Invalid credentials")
+
+
+def signup():
+    username = st.text_input("New Username")
+    password = st.text_input("New Password", type="password")
+
+    if st.button("Sign Up"):
+        users[username] = password
+        st.success("Account created")
