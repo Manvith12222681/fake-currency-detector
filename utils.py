@@ -1,23 +1,31 @@
-# ==========================================
-# UTILITY FUNCTIONS
-# ==========================================
+# utils.py
+
 import numpy as np
 import cv2
+from PIL import Image
 
-def preprocess_image(file, size):
-    file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
-    image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+# ================================
+# PREPROCESS IMAGE
+# ================================
+def preprocess_image(uploaded_file, image_size):
+    image = Image.open(uploaded_file).convert("RGB")
+    display_img = image
 
-    display_img = image.copy()
-
-    image = cv2.resize(image, size)
-    image = image.astype("float32") / 255.0
+    image = image.resize(image_size)
+    image = np.array(image) / 255.0
     image = np.expand_dims(image, axis=0)
 
     return image, display_img
 
 
+# ================================
+# PREDICT
+# ================================
 def predict(model, image):
-    # Dummy prediction (for deployment demo)
-    import random
-    return random.random()
+    prediction = model.predict(image)
+
+    score = float(prediction[0][0])
+
+    print("Prediction Score:", score)  # 🔥 DEBUG
+
+    return score
