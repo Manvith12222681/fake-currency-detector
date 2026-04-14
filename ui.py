@@ -5,51 +5,32 @@ def load_css():
     <style>
 
     .stApp {
-        background: linear-gradient(135deg, #020617, #0f172a);
+        background: linear-gradient(270deg, #020617, #0f172a, #1e293b);
+        background-size: 600% 600%;
+        animation: gradientBG 10s ease infinite;
         color: white;
         font-family: 'Inter', sans-serif;
-        animation: fadeIn 1s ease-in;
     }
 
-    @keyframes fadeIn {
-        from {opacity: 0;}
-        to {opacity: 1;}
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
     }
 
-    .block-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .auth-box {
-        width: 420px;
-        padding: 40px;
-        border-radius: 20px;
-        background: rgba(255,255,255,0.08);
-        backdrop-filter: blur(20px);
-        box-shadow: 0 0 40px rgba(0,229,255,0.2);
-        text-align: center;
-        margin-top: 80px;
-        animation: slideUp 0.8s ease;
-    }
-
-    @keyframes slideUp {
-        from {transform: translateY(40px); opacity: 0;}
-        to {transform: translateY(0); opacity: 1;}
-    }
-
-    .title {
-        font-size: 40px;
+    .hero-title {
+        font-size: 52px;
         font-weight: bold;
         background: linear-gradient(90deg, #00e5ff, #7c3aed);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        text-align: center;
+        animation: glow 2s infinite alternate;
     }
 
-    .subtitle {
-        color: #cbd5f5;
-        margin-top: 10px;
+    @keyframes glow {
+        from { text-shadow: 0 0 10px #00e5ff; }
+        to { text-shadow: 0 0 25px #7c3aed; }
     }
 
     .navbar {
@@ -57,48 +38,65 @@ def load_css():
         justify-content: space-between;
         padding: 15px 30px;
         background: rgba(255,255,255,0.08);
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        width: 90%;
+        border-radius: 15px;
+        backdrop-filter: blur(12px);
+        margin-bottom: 30px;
     }
 
     .logo {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: bold;
         color: #00e5ff;
     }
 
-    .hero {
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .hero-title {
-        font-size: 48px;
-        font-weight: bold;
-        background: linear-gradient(90deg, #00e5ff, #7c3aed);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
     .card {
         background: rgba(255,255,255,0.08);
-        padding: 20px;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         margin-top: 20px;
-        width: 100%;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 60px rgba(0,229,255,0.3);
+    }
+
+    section[data-testid="stFileUploader"] {
+        border: 2px dashed #00e5ff;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        transition: 0.3s;
+    }
+
+    section[data-testid="stFileUploader"]:hover {
+        border-color: #7c3aed;
+        box-shadow: 0 0 20px #7c3aed;
+    }
+
+    .stButton>button {
+        background: linear-gradient(90deg, #00e5ff, #7c3aed);
+        border-radius: 12px;
+        padding: 12px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .stButton>button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px #00e5ff;
     }
 
     .real { color: #00ff9f; font-size: 22px; }
     .fake { color: #ff4b4b; font-size: 22px; }
 
-    .stButton>button {
-        background: linear-gradient(90deg, #00e5ff, #7c3aed);
-        border-radius: 10px;
-        padding: 10px;
-        font-weight: bold;
-        width: 100%;
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+        color: #94a3b8;
     }
 
     </style>
@@ -107,9 +105,9 @@ def load_css():
 
 def auth_ui():
     st.markdown("""
-    <div class="auth-box">
-        <div class="title">Rupee Vision</div>
-        <div class="subtitle">Secure Login to Continue</div>
+    <div style="text-align:center; margin-top:80px;">
+        <h1 class="hero-title">Rupee Vision</h1>
+        <p style="color:#cbd5f5;">Secure Login to Continue</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -125,9 +123,7 @@ def navbar():
 
 def hero():
     st.markdown("""
-    <div class="hero">
-        <div class="hero-title">Detect Fake Currency Instantly</div>
-    </div>
+    <div class="hero-title">Detect Fake Currency Instantly</div>
     """, unsafe_allow_html=True)
 
 
@@ -140,10 +136,10 @@ def show_result(score):
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
     if score > 0.5:
-        st.markdown('<div class="fake">Fake Currency</div>', unsafe_allow_html=True)
+        st.markdown('<div class="fake">Fake Currency Detected</div>', unsafe_allow_html=True)
         confidence = score
     else:
-        st.markdown('<div class="real">Real Currency</div>', unsafe_allow_html=True)
+        st.markdown('<div class="real">Real Currency Detected</div>', unsafe_allow_html=True)
         confidence = 1 - score
 
     st.progress(int(confidence * 100))
@@ -151,4 +147,4 @@ def show_result(score):
 
 
 def footer():
-    st.markdown("<center>Rupee Vision © 2026</center>", unsafe_allow_html=True)
+    st.markdown("<div class='footer'>Rupee Vision © 2026</div>", unsafe_allow_html=True)
