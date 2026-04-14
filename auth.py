@@ -14,7 +14,6 @@ def login():
         else:
             st.error("Invalid credentials")
 
-
 def signup():
     username = st.text_input("New Username")
     password = st.text_input("New Password", type="password")
