@@ -1,5 +1,9 @@
 import streamlit as st
 
+
+# ================================
+# GLOBAL CSS (PREMIUM DESIGN)
+# ================================
 def load_css():
     st.markdown("""
     <style>
@@ -33,7 +37,7 @@ def load_css():
     }
 
     .hero-title {
-        font-size: 48px;
+        font-size: 50px;
         font-weight: bold;
         background: linear-gradient(to right, #38bdf8, #6366f1);
         -webkit-background-clip: text;
@@ -43,6 +47,20 @@ def load_css():
     .hero-sub {
         color: #cbd5f5;
         margin-top: 10px;
+        font-size: 18px;
+    }
+
+    /* AUTH BOX */
+    .auth-box {
+        max-width: 400px;
+        margin: auto;
+        margin-top: 80px;
+        padding: 30px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        text-align: center;
     }
 
     /* CARD */
@@ -79,6 +97,9 @@ def load_css():
     """, unsafe_allow_html=True)
 
 
+# ================================
+# NAVBAR
+# ================================
 def navbar():
     st.markdown("""
     <div class="navbar">
@@ -88,6 +109,9 @@ def navbar():
     """, unsafe_allow_html=True)
 
 
+# ================================
+# HERO SECTION
+# ================================
 def hero():
     st.markdown("""
     <div class="hero">
@@ -97,6 +121,21 @@ def hero():
     """, unsafe_allow_html=True)
 
 
+# ================================
+# AUTH UI (LOGIN/SIGNUP SCREEN)
+# ================================
+def auth_ui():
+    st.markdown("""
+    <div class="auth-box">
+        <h2 style='color:#38bdf8;'>Rupee Vision</h2>
+        <p style='color:#cbd5f5;'>Secure Login to Continue</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+# ================================
+# UPLOAD CARD
+# ================================
 def upload_card():
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown("### Upload Currency Image")
@@ -105,6 +144,9 @@ def upload_card():
     return file
 
 
+# ================================
+# RESULT DISPLAY
+# ================================
 def show_result(score):
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
@@ -121,6 +163,9 @@ def show_result(score):
     st.markdown('</div>', unsafe_allow_html=True)
 
 
+# ================================
+# FOOTER
+# ================================
 def footer():
     st.markdown("""
     <div class="footer">
