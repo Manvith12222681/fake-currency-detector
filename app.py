@@ -5,17 +5,16 @@ from utils import preprocess_image, predict
 from ui import load_css, navbar, hero, upload_card, show_result, footer, auth_ui
 from auth import login, signup
 
-# Page config
 st.set_page_config(page_title="Rupee Vision", layout="wide")
 
-# Session state
+# Session
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
 # Load UI
 load_css()
 
-# ================= LOGIN / SIGNUP =================
+# ================= AUTH =================
 if not st.session_state["logged_in"]:
 
     auth_ui()
@@ -30,7 +29,7 @@ if not st.session_state["logged_in"]:
         else:
             signup()
 
-# ================= MAIN APP =================
+# ================= MAIN =================
 else:
 
     navbar()
