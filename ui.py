@@ -123,26 +123,40 @@ def navbar():
 
 def hero():
     st.markdown("""
-    <div class="hero-title">Detect Fake Currency Instantly</div>
+    <div style="margin-top:40px; margin-bottom:20px;">
+        <div class="hero-title">Detect Fake Currency Instantly</div>
+    </div>
     """, unsafe_allow_html=True)
 
 
 def upload_card():
-    st.markdown('<div class="card">Upload Currency Image</div>', unsafe_allow_html=True)
-    return st.file_uploader("", type=["jpg","png","jpeg"])
+    st.markdown('<div class="card"><h3>📤 Upload Currency Image</h3></div>', unsafe_allow_html=True)
+    return st.file_uploader("Choose an image", type=["jpg","png","jpeg"])
 
 
 def show_result(score):
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
+    # Debug (keep this for testing)
+    st.caption(f"🔍 Prediction Score: {score:.4f}")
+
+    # Prediction logic
     if score > 0.5:
-        st.markdown('<div class="fake">Fake Currency Detected</div>', unsafe_allow_html=True)
+        label = "❌ Fake Currency Detected"
+        css_class = "fake"
         confidence = score
     else:
-        st.markdown('<div class="real">Real Currency Detected</div>', unsafe_allow_html=True)
+        label = "✅ Real Currency Detected"
+        css_class = "real"
         confidence = 1 - score
 
+    # Display result
+    st.markdown(f'<div class="{css_class}">{label}</div>', unsafe_allow_html=True)
+
+    # Progress bar + percentage
     st.progress(int(confidence * 100))
+    st.markdown(f"**Confidence: {confidence*100:.1f}%**")
+
     st.markdown('</div>', unsafe_allow_html=True)
 
 
