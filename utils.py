@@ -1,7 +1,6 @@
 # utils.py
 
 import numpy as np
-import cv2
 from PIL import Image
 
 # ================================
@@ -19,13 +18,10 @@ def preprocess_image(uploaded_file, image_size):
 
 
 # ================================
-# PREDICT
+# PREDICT (DUMMY VERSION)
 # ================================
 def predict(model, image):
-    prediction = model.predict(image)
-
-    score = float(prediction[0][0])
-
-    print("Prediction Score:", score)  # 🔥 DEBUG
-
+    import random
+    score = random.random()
+    print("Prediction Score:", score)
     return score
