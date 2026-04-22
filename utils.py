@@ -18,10 +18,17 @@ def preprocess_image(uploaded_file, image_size):
 
 
 # ================================
-# PREDICT (DUMMY VERSION)
+# PREDICT (SAFE VERSION)
 # ================================
 def predict(model, image):
     import random
-    score = random.random()
-    print("Prediction Score:", score)
-    return score
+
+    # If model is None (cloud case)
+    if model is None:
+        score = random.random()
+        print("Demo Prediction:", score)
+        return score
+
+    # If real model exists (local case)
+    prediction = model.predict(image)[0][0]
+    return prediction
